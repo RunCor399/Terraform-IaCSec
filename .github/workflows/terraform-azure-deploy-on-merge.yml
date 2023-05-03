@@ -67,7 +67,7 @@ jobs:
 
         if: success() || failure()
         with:
-          ref: '${{ main_ref }}'
+          ref: '/refs/heads/main'
           sarif_file: results.sarif
 
       - name: Dump environment
