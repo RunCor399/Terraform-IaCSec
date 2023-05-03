@@ -25,7 +25,7 @@ jobs:
       run: echo "SHALL_EXECUTE=true" >> $GITHUB_OUTPUT
   
   if_merged:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && ${{ needs.is_executed.outputs.output1 == 'true'}}
     runs-on: ubuntu-latest
     needs: is_executed
     steps:
@@ -40,7 +40,6 @@ jobs:
       
 
     name: 'Checkov IaC Sec Scan'
-    #if: ${{ needs.is_executed.outputs.output1 == 'true'}}
     runs-on: ubuntu-latest
     needs: if_merged
     defaults:
@@ -65,7 +64,6 @@ jobs:
     
   terraform-azure-deploy:
     name: 'Terraform Azure Deploy'
-    if: ${{ needs.is_executed.outputs.output1 == 'true'}}
     runs-on: ubuntu-latest
     needs: IaC_Sec_Scan
     defaults:
@@ -73,9 +71,6 @@ jobs:
         shell: bash
 
     steps:
-    - name: Shall execute set
-      run: SHALL_EXECUTE=false
-      
     - name: Checkout
       uses: actions/checkout@v3
     - name: Terraform
