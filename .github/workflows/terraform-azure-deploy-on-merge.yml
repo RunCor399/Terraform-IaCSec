@@ -61,17 +61,17 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+      # - name: Upload SARIF file
+      #   uses: github/codeql-action/upload-sarif@v2
           
 
-        if: success() || failure()
-        with:
-          ref: '/refs/heads/main'
-          sarif_file: results.sarif
+      #   if: success() || failure()
+      #   with:
+      #     ref: '/refs/heads/main'
+      #     sarif_file: results.sarif
 
-      - name: Dump environment
-        run: env
+      # - name: Dump environment
+      #   run: env
     
   terraform-azure-deploy:
     name: 'Terraform Azure Deploy'
