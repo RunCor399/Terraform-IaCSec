@@ -48,7 +48,6 @@
 #   location            = var.simple_resource_group.location
 #   size                = "Standard_B1s"
 #   admin_username      = "adminuser"
-#   admin_password      = "Fakep4ssword"
 #   network_interface_ids = [
 #     azurerm_network_interface.simple_network_interface.id,
 #   ]
