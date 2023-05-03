@@ -44,18 +44,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Checkov GitHub Action
-      #   uses: bridgecrewio/checkov-action@v12
-      #   with:
-      #     output_format: cli,sarif
-      #     output_file_path: console,results.sarif
+      - name: Checkov GitHub Action
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          output_format: cli,sarif
+          output_file_path: console,results.sarif
       
-      # - name: Upload SARIF file
-      #   uses: github/codeql-action/upload-sarif@v2
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
 
-      #   if: success() || failure()
-      #   with:
-      #     sarif_file: results.sarif
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
     
   terraform-azure-deploy:
     name: 'Terraform Azure Deploy'
