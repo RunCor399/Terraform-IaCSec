@@ -32,6 +32,7 @@ jobs:
       contents: read
       security-events: write
       actions: read
+      
 
     name: 'Checkov IaC Sec Scan'
     #if: ${{ needs.is_executed.outputs.output1 == 'true'}}
