@@ -10,6 +10,7 @@ on:
 env:
   TF_VAR_azure_sp_key: ${{ secrets.AZURE_SP_SECRET }}
   TF_VAR_storage_account_key: ${{ secrets.TERRAFORM_STATE_STORAGE_ACCOUNT_KEY }}
+  main_ref: "/refs/heads/main"
 
 
 
@@ -60,15 +61,17 @@ jobs:
           output_format: cli,sarif
           output_file_path: console,results.sarif
 
-      - name: Dump environment
-        run: env
-        
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
+          
 
         if: success() || failure()
         with:
+          ref: '${{ main_ref }}'
           sarif_file: results.sarif
+
+      - name: Dump environment
+        run: env
     
   terraform-azure-deploy:
     name: 'Terraform Azure Deploy'
