@@ -38,10 +38,10 @@ jobs:
 
   IaC_Sec_Scan:
     if: ${{ needs.is_executed.outputs.output1 == 'true'}}
-    permissions: read-all
-      # contents: read
-      # security-events: write
-      # actions: read
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
       
 
     name: 'Checkov IaC Sec Scan'
