@@ -1,0 +1,73 @@
+version: 2.1
+
+orbs:
+  terraform: circleci/terraform@3.2.1
+
+parameters:
+  execution_condition:
+    type: boolean
+    default: false
+  terraform-sources:
+    type: string
+    default: "./src"
+
+jobs:
+  deploy-azure-infrastructure:
+    environment: # writing TF_VAR_azure_sp_key: $AZURE_SP_SECRET doesn't work because Context env variables cannot be passed
+      TF_VAR_azure_sp_key: key
+    # need a way to store this key securely
+    # environment:
+    #   TF_VAR_azure_sp_key: "$AZURE_SP_SECRET"
+
+    executor: terraform/default 
+    steps:
+      - checkout
+      # - run: export ARM_CLIENT_SECRET="key"
+      # - run:
+          # name: Set environment variables
+          # command: |
+          #   echo $AZURE_SP_SECRET
+          #   echo $TF_VAR_azure_sp_key
+          # command: |
+          #   echo 'export ARM_CLIENT_SECRET=$AZURE_SP_SECRET'
+      - run: terraform -chdir=<< pipeline.parameters.terraform-sources >> init -backend-config="access_key=$TERRAFORM_STATE_STORAGE_ACCOUNT_KEY"
+      - terraform/validate:
+          path: << pipeline.parameters.terraform-sources >>
+          # May need to add fmt correction flag
+      # - terraform/fmt:
+      #     path: << pipeline.parameters.terraform-sources >>
+      - run: terraform -chdir=<< pipeline.parameters.terraform-sources >> fmt -write=true
+      - run: | 
+          terraform -chdir=<< pipeline.parameters.terraform-sources >> plan -out=./windows-vm.tfplan -target="azurerm_windows_virtual_machine.simple_vm"
+      - terraform/apply:
+          path: << pipeline.parameters.terraform-sources >>
+          plan: windows-vm.tfplan
+      - terraform/destroy:
+          path: << pipeline.parameters.terraform-sources >>
+
+
+
+  # destroy_azure_infrastructure:
+  #   environment:
+  #     TF_VAR_azure_sp_key: key
+  #   executor: terraform/default 
+  #   steps:
+  #     - checkout
+  #     - run: terraform -chdir=<< pipeline.parameters.terraform-sources >> init -backend-config="access_key=$TERRAFORM_STATE_STORAGE_ACCOUNT_KEY"
+  #     - terraform/destroy:
+  #         path: << pipeline.parameters.terraform-sources >>
+
+
+workflows:
+  IaC_Security:
+    when:
+      or:
+        - equal: [true, << pipeline.parameters.execution_condition >> ]
+    jobs:
+      - deploy-azure-infrastructure:
+          context:
+            - Terraform Secrets
+      # - destroy_azure_infrastructure:
+      #     requires:
+      #       - deploy-azure-infrastructure
+      
