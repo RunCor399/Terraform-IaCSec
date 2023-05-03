@@ -9,6 +9,7 @@ resource "azurerm_virtual_network" "simple_virtual_network" {
 }
 
 
+
 resource "azurerm_subnet" "simple_subnet" {
   name                 = "internal"
   resource_group_name  = var.simple_resource_group.name

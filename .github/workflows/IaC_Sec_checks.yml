@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  IaC_Sec_Scan:
+  IaC_Sec_Checkov_Scan:
     permissions:
       contents: read
       security-events: write
@@ -15,7 +15,6 @@ jobs:
       
     name: 'Checkov IaC Sec Scan'
     runs-on: ubuntu-latest
-    needs: is_executed
     defaults:
       run:
         shell: bash
