@@ -1,8 +1,11 @@
 name: IaC Sec checks performed with Checkov
 
+permissions: read-all
+
 on:
   pull_request:
     types: [opened, reopened]
+
 
 
 jobs:
