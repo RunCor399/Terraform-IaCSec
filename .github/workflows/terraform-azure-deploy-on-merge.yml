@@ -1,12 +1,9 @@
 name: Terraform Azure Deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/**'
-      - '.github/**'
+  pull_request:
+    types:
+      - closed
 
 env:
   TF_VAR_azure_sp_key: ${{ secrets.AZURE_SP_SECRET }}
@@ -14,6 +11,13 @@ env:
 
 
 jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo The PR was merged
+    
   is_executed:
     name: 'Workflow execution controller'
     runs-on: ubuntu-latest
@@ -26,6 +30,8 @@ jobs:
     - name: Shall execute set
       id: step1
       run: echo "SHALL_EXECUTE=false" >> $GITHUB_OUTPUT
+  
+  
 
   IaC_Sec_Scan:
     permissions:
