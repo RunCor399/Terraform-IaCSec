@@ -33,10 +33,10 @@ jobs:
         echo The PR was merged
 
   IaC_Sec_Scan:
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
+    permissions: read-all
+      # contents: read
+      # security-events: write
+      # actions: read
       
 
     name: 'Checkov IaC Sec Scan'
