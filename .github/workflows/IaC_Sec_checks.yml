@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  IaC_Sec_Scan:
+  IaC_Sec_Checkov_Scan:
     permissions:
       contents: read
       security-events: write
