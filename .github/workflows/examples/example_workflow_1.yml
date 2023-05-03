@@ -4,6 +4,8 @@ name: Workflow 1
 # only if at least one file
 # inside src/server_1 or src/server_2 folders
 # has been modified
+permissions: read-all
+
 on: 
   push:
     branches:
@@ -11,6 +13,8 @@ on:
     paths:
       - 'src/server_1/**'
       - 'src/server_2/**'
+
+
 
 jobs:
   test:

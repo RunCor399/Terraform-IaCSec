@@ -1,16 +1,19 @@
 name: IaC Sec checks performed with Checkov
 
+permissions: read-all
+
 on:
   pull_request:
     types: [opened, reopened]
 
 
+
 jobs:
   IaC_Sec_Checkov_Scan:
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
+    permissions: read-all
+      # contents: read
+      # security-events: write
+      # actions: read
       
       
     name: 'Checkov IaC Sec Scan'
