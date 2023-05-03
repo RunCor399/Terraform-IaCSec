@@ -12,6 +12,7 @@ jobs:
       security-events: write
       actions: read
       
+      
     name: 'Checkov IaC Sec Scan'
     runs-on: ubuntu-latest
     needs: is_executed
