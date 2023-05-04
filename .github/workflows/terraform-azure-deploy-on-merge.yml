@@ -60,6 +60,15 @@ jobs:
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
+      
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
+          ref: 'refs/heads/main'
+          sha: '2d50a4207e25b176c95547913e8b303ecb89a651'
 
     
   terraform-azure-deploy:
