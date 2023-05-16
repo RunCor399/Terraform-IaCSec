@@ -37,4 +37,9 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results.sarif
-          
+          ref: ${{ github.head_ref }}
+          sha: ${{ github.sha }}
+          # Obtain ref and sha automatically? (of pr-test)
+
+
+# NEED REF AND SHA OF PULL REQUEST
