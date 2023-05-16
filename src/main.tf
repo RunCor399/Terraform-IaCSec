@@ -28,10 +28,10 @@ provider "azurerm" {
 #   location = var.simple_resource_group.location
 # }
 
-# resource "azurerm_resource_group" "aks_resource_group" {
-#   name = var.aks_resource_group.name
-#   location = var.aks_resource_group.location
-# }
+resource "azurerm_resource_group" "aks_resource_group" {
+  name = var.aks_resource_group.name
+  location = var.aks_resource_group.location
+}
 
 # resource "azurerm_resource_group" "cosmos_db_resource_group" {
 #   name = var.cosmos_db_resource_group.name
