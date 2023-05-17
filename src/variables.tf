@@ -30,6 +30,15 @@ variable "aks_resource_group" {
   }
 }
 
+variable "mysql_db_resource_group" {
+  description = "Azure MySQL DB Resource Group Info"
+  type        = map(string)
+  default = {
+    name = "mysql-db-resource-group"
+    location = "UK South"
+  }
+}
+
 variable "cosmos_db_resource_group" {
   description = "Azure Cosmos DB Resource Group Info"
   type        = map(string)

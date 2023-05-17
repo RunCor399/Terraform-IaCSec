@@ -38,6 +38,12 @@ provider "azurerm" {
 #   location = var.cosmos_db_resource_group.location
 # }
 
+resource "azurerm_resource_group" "mysql_db_resource_group" {
+  name     = var.mysql_db_resource_group.name
+  location = var.mysql_db_resource_group.location
+}
+
+
 
 
 
