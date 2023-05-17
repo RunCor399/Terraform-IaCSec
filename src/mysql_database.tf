@@ -45,6 +45,6 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
   #private_dns_zone_id    = azurerm_private_dns_zone.database_dns_zone.id
   sku_name               = "B_Standard_B1s"
   version                = "8.0.21"
-
+  depends_on = [azurerm_resource_group.mysql_db_resource_group]
   #depends_on = [azurerm_private_dns_zone_virtual_network_link.private_dns_zone]
 }
