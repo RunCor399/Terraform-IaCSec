@@ -47,3 +47,4 @@ resource "azurerm_resource_group" "mysql_db_resource_group" {
 
 
 
+
