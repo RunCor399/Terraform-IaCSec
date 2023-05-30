@@ -1,0 +1,55 @@
+# Load Balancer Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: db-connector
+  ports:
+  - name: db-connector
+    port: 8888
+    targetPort: 8888
+---
+# Internal Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-connector
+spec:
+  type: ClusterIP
+  selector:
+    app: db-connector
+  ports:
+  - name: custom-port
+    port: 8888
+    targetPort: 8888
+---
+# Spring App Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-connector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-connector
+  template:
+    metadata:
+      labels:
+        app: db-connector
+    spec:
+      containers:
+        - name: db-connector
+          image: runcor3/db_connector:latest
+          ports:
+            - containerPort: 8888
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c"]
+                args: ["export KUBE_TOKEN=/var/run/secrets/kubernetes.io/serviceaccount/token"]
+
+
