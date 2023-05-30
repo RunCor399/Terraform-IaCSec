@@ -1,5 +1,5 @@
 
-variable "azure_sp_key" {}
+#variable "azure_sp_key" {}
 
 variable "credentials" {
   description = "Azure Service Provider Credentials"

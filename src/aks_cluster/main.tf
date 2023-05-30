@@ -18,7 +18,8 @@ terraform {
 provider "azurerm" {
   subscription_id = var.credentials["subscription_id"]
   client_id       = var.credentials["client_id"]
-  client_secret   = var.azure_sp_key
+  #client_secret   = var.azure_sp_key
+  client_secret = "uny8Q~ILMQkgh5P7t_siumASCm0N.SU6kPNBmdnT"
   tenant_id       = var.credentials["tenant_id"]
   features {}
 }
