@@ -1,45 +1,45 @@
-name: IaC Sec checks performed with Checkov
+# name: IaC Sec checks performed with Checkov
 
-permissions: read-all
+# permissions: read-all
 
-on:
-  pull_request:
-    types: [opened, reopened]
+# on:
+#   pull_request:
+#     types: [opened, reopened]
 
 
 
-jobs:
-  IaC_Sec_Checkov_Scan:
-    permissions: read-all
-      # contents: read
-      # security-events: write
-      # actions: read
+# jobs:
+#   IaC_Sec_Checkov_Scan:
+#     permissions: read-all
+#       # contents: read
+#       # security-events: write
+#       # actions: read
       
       
-    name: 'Checkov IaC Sec Scan'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
+#     name: 'Checkov IaC Sec Scan'
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         shell: bash
     
-    steps:
-      - uses: actions/checkout@v3
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Checkov GitHub Action
-        uses: bridgecrewio/checkov-action@v12
-        with:
-          output_format: cli,sarif
-          output_file_path: console,results.sarif
+#       - name: Checkov GitHub Action
+#         uses: bridgecrewio/checkov-action@v12
+#         with:
+#           output_format: cli,sarif
+#           output_file_path: console,results.sarif
       
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+#       - name: Upload SARIF file
+#         uses: github/codeql-action/upload-sarif@v2
 
-        if: success() || failure()
-        with:
-          sarif_file: results.sarif
-          ref: ${{ github.head_ref }}
-          sha: ${{ github.sha }}
-          # Obtain ref and sha automatically? (of pr-test)
+#         if: success() || failure()
+#         with:
+#           sarif_file: results.sarif
+#           ref: ${{ github.head_ref }}
+#           sha: ${{ github.sha }}
+#           # Obtain ref and sha automatically? (of pr-test)
 
 
-# NEED REF AND SHA OF PULL REQUEST
+# # NEED REF AND SHA OF PULL REQUEST

@@ -12,6 +12,7 @@ spec:
     port: 8888
     targetPort: 8888
 ---
+
 # Internal Service
 apiVersion: v1
 kind: Service

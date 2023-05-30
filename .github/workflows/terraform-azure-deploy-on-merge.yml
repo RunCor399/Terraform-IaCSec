@@ -130,6 +130,7 @@ jobs:
     - name: Terraform Destroy
       id: destroy
       run: terraform -chdir=./src destroy -auto-approve
+      
 
 
 
