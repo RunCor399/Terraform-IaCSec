@@ -48,6 +48,7 @@ resource "azurerm_windows_virtual_machine" "simple_vm" {
   location            = var.simple_resource_group.location
   size                = "Standard_B1s"
   admin_username      = "adminuser"
+  admin_password      = "F4kepass"
   network_interface_ids = [
     azurerm_network_interface.simple_network_interface.id,
   ]

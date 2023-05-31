@@ -29,7 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   default_node_pool {
     name           = "default"
     node_count     = 2
-    vm_size        = "Standard_B2s"
+    vm_size        = "standard_a2_v2"
     vnet_subnet_id = azurerm_subnet.aks_node_subnet.id
   }
 
@@ -38,7 +38,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     type = "SystemAssigned"
   }
 
-
-  azure_policy_enabled             = true
+  #gatekeeper
+  azure_policy_enabled             = false
   http_application_routing_enabled = false
 }
