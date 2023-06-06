@@ -18,8 +18,8 @@ resource "azurerm_linux_web_app" "keycloak-webapp" {
   https_only = true
 
   app_settings = {
-      "KEYCLOAK_ADMIN" = "admin"
-      "KEYCLOAK_ADMIN_PASSWORD" = sensitive(var.secrets.admin_password)
+      "KEYCLOAK_USER" = "admin"
+      "KEYCLOAK_PASSWORD" = sensitive(var.secrets.admin_password)
       "DOCKER_REGISTRY_SERVER_URL" = "https://registry.hub.docker.com/v2/"
       "WEBSITE_ENABLE_APP_SERVICE_STORAGE" = true
   }
