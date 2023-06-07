@@ -18,7 +18,6 @@
 
 # [START gke_release_kubernetes_manifests_microservices_demo]
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -32,6 +32,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     vm_size        = "standard_d2_v3"
     vnet_subnet_id = azurerm_subnet.aks_node_subnet.id
   }
+  
 
 
   identity {

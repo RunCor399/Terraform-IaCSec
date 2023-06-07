@@ -15,6 +15,7 @@ terraform {
 }
 
 
+
 provider "azurerm" {
   subscription_id = var.credentials["subscription_id"]
   client_id       = var.credentials["client_id"]

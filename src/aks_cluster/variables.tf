@@ -12,6 +12,7 @@ variable "credentials" {
 }
 
 
+
 variable "aks_resource_group" {
   description = "Azure AKS Resource Group Info"
   type        = map(string)
