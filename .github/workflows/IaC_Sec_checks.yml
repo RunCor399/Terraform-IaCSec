@@ -27,6 +27,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
+    
 
       - name: Check if pull request is opened/reopened
         id: pr_status
