@@ -39,7 +39,7 @@ jobs:
 
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12
-        if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
+        #if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
