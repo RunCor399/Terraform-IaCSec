@@ -32,7 +32,7 @@ jobs:
         id: pr_status
         uses: octokit/request-action@v2.x
         with:
-          route: GET /repos/RunCor399/Terraform-IaCSec/pulls/${{ github.event.pull_request.number }}
+          route: GET /repos/RunCor399/Terraform-IaCSec/pulls/${{ github.event.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
