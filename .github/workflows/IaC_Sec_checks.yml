@@ -40,7 +40,7 @@ jobs:
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12
         #if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
-        
+
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
@@ -51,5 +51,5 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results.sarif
-          ref: ${{ github.head_ref }}
-          sha: ${{ github.sha }}
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+          sha: ${{ github.event.pull_request.head.sha }}
