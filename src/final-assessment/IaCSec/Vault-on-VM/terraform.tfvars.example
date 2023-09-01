@@ -1,0 +1,16 @@
+#------------
+# Required
+#------------
+
+
+
+
+#------------
+# Optional
+#------------
+
+# To overwrite the default (Optional)
+# location="westus"
+
+# To overwrite the default (Optional)
+# environment = "test"

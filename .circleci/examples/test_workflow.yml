@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "test job"
+
+  test2:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "test2 job after test"
+
+
+workflows:
+  test:
+    jobs:
+      - test
+      - test2:
+          requires:
+            - test
+
+            

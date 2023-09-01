@@ -1,0 +1,14 @@
+version: 2.1
+
+
+
+jobs:
+  test_cont:
+    steps:
+      - checkout
+      - run: echo "continuation 2 executed"
+
+workflows:
+  cont2_workflow:
+    jobs:
+      - test_cont
