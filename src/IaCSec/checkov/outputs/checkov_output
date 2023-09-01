@@ -1,0 +1,268 @@
+
+       _               _              
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V / 
+  \___|_| |_|\___|\___|_|\_\___/ \_/  
+                                      
+By bridgecrew.io | version: 2.3.202 
+
+terraform scan results:
+
+Passed checks: 7, Failed checks: 3, Skipped checks: 0
+
+Check: CKV_AZURE_183: "Ensure that VNET uses local DNS addresses"
+	PASSED for resource: azurerm_virtual_network.simple_virtual_network
+	File: /windows_vm.tf:1-9
+Check: CKV_AZURE_182: "Ensure that VNET has at least 2 connected DNS Endpoints"
+	PASSED for resource: azurerm_virtual_network.simple_virtual_network
+	File: /windows_vm.tf:1-9
+Check: CKV_AZURE_118: "Ensure that Network Interfaces disable IP forwarding"
+	PASSED for resource: azurerm_network_interface.simple_network_interface
+	File: /windows_vm.tf:23-41
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-network-interfaces-disable-ip-forwarding
+Check: CKV_AZURE_179: "Ensure VM agent is installed"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+Check: CKV_AZURE_92: "Ensure that Virtual Machines use managed disks"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-virtual-machines-use-managed-disks
+Check: CKV_AZURE_177: "Ensure Windows VM enables automatic updates"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+Check: CKV_AZURE_119: "Ensure that Network Interfaces don't use public IPs"
+	PASSED for resource: azurerm_network_interface.simple_network_interface
+	File: /windows_vm.tf:23-41
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-network-interfaces-dont-use-public-ips
+Check: CKV_AZURE_50: "Ensure Virtual Machine Extensions are not Installed"
+	FAILED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/bc_azr_general_14
+
+		44 | resource "azurerm_windows_virtual_machine" "simple_vm" {
+		45 |   name                = "simple-vm-2"
+		46 |   resource_group_name = var.simple_resource_group.name
+		47 |   location            = var.simple_resource_group.location
+		48 |   size                = "Standard_B1s"
+		49 |   admin_username      = "adminuser"
+		50 |   admin_password      = "Adm**********"
+		51 |   network_interface_ids = [
+		52 |     azurerm_network_interface.simple_network_interface.id,
+		53 |   ]
+		54 | 
+		55 | 
+		56 |   os_disk {
+		57 |     caching              = "ReadWrite"
+		58 |     storage_account_type = "Standard_LRS"
+		59 |   }
+		60 | 
+		61 |   source_image_reference {
+		62 |     publisher = "MicrosoftWindowsServer"
+		63 |     offer     = "WindowsServer"
+		64 |     sku       = "2016-Datacenter"
+		65 |     version   = "latest"
+		66 |   }
+		67 | 
+		68 |   depends_on = [
+		69 |     azurerm_resource_group.simple_resource_group,
+		70 |     azurerm_network_interface.simple_network_interface
+		71 |   ]
+		72 | }
+
+Check: CKV_AZURE_151: "Ensure Windows VM enables encryption"
+	FAILED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/ensure-azure-windows-vm-enables-encryption
+
+		44 | resource "azurerm_windows_virtual_machine" "simple_vm" {
+		45 |   name                = "simple-vm-2"
+		46 |   resource_group_name = var.simple_resource_group.name
+		47 |   location            = var.simple_resource_group.location
+		48 |   size                = "Standard_B1s"
+		49 |   admin_username      = "adminuser"
+		50 |   admin_password      = "Adm**********"
+		51 |   network_interface_ids = [
+		52 |     azurerm_network_interface.simple_network_interface.id,
+		53 |   ]
+		54 | 
+		55 | 
+		56 |   os_disk {
+		57 |     caching              = "ReadWrite"
+		58 |     storage_account_type = "Standard_LRS"
+		59 |   }
+		60 | 
+		61 |   source_image_reference {
+		62 |     publisher = "MicrosoftWindowsServer"
+		63 |     offer     = "WindowsServer"
+		64 |     sku       = "2016-Datacenter"
+		65 |     version   = "latest"
+		66 |   }
+		67 | 
+		68 |   depends_on = [
+		69 |     azurerm_resource_group.simple_resource_group,
+		70 |     azurerm_network_interface.simple_network_interface
+		71 |   ]
+		72 | }
+
+Check: CKV2_AZURE_31: "Ensure VNET subnet is configured with a Network Security Group (NSG)"
+	FAILED for resource: azurerm_subnet.simple_subnet
+	File: /windows_vm.tf:12-21
+
+		12 | resource "azurerm_subnet" "simple_subnet" {
+		13 |   name                 = "internal"
+		14 |   resource_group_name  = var.simple_resource_group.name
+		15 |   virtual_network_name = azurerm_virtual_network.simple_virtual_network.name
+		16 |   address_prefixes     = ["10.1.2.0/24"]
+		17 |   depends_on = [
+		18 |     azurerm_resource_group.simple_resource_group,
+		19 |     azurerm_virtual_network.simple_virtual_network
+		20 |   ]
+		21 | }
+
+secrets scan results:
+
+Passed checks: 0, Failed checks: 1, Skipped checks: 0
+
+Check: CKV_SECRET_6: "Base64 High Entropy String"
+	FAILED for resource: 8ac6e6bf1b8130ce87af019be6bdfae37020b639
+	File: /windows_vm.tf:50-51
+	Guide: https://docs.bridgecrew.io/docs/git_secrets_6
+
+		50 |   admin_password      = "Adm**********"
+
+
+
+       _               _              
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V / 
+  \___|_| |_|\___|\___|_|\_\___/ \_/  
+                                      
+By bridgecrew.io | version: 2.3.202 
+
+terraform scan results:
+
+Passed checks: 7, Failed checks: 3, Skipped checks: 0
+
+Check: CKV_AZURE_183: "Ensure that VNET uses local DNS addresses"
+	PASSED for resource: azurerm_virtual_network.simple_virtual_network
+	File: /windows_vm.tf:1-9
+Check: CKV_AZURE_182: "Ensure that VNET has at least 2 connected DNS Endpoints"
+	PASSED for resource: azurerm_virtual_network.simple_virtual_network
+	File: /windows_vm.tf:1-9
+Check: CKV_AZURE_118: "Ensure that Network Interfaces disable IP forwarding"
+	PASSED for resource: azurerm_network_interface.simple_network_interface
+	File: /windows_vm.tf:23-41
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-network-interfaces-disable-ip-forwarding
+Check: CKV_AZURE_179: "Ensure VM agent is installed"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+Check: CKV_AZURE_92: "Ensure that Virtual Machines use managed disks"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-virtual-machines-use-managed-disks
+Check: CKV_AZURE_177: "Ensure Windows VM enables automatic updates"
+	PASSED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+Check: CKV_AZURE_119: "Ensure that Network Interfaces don't use public IPs"
+	PASSED for resource: azurerm_network_interface.simple_network_interface
+	File: /windows_vm.tf:23-41
+	Guide: https://docs.bridgecrew.io/docs/ensure-that-network-interfaces-dont-use-public-ips
+Check: CKV_AZURE_50: "Ensure Virtual Machine Extensions are not Installed"
+	FAILED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/bc_azr_general_14
+
+		44 | resource "azurerm_windows_virtual_machine" "simple_vm" {
+		45 |   name                = "simple-vm-2"
+		46 |   resource_group_name = var.simple_resource_group.name
+		47 |   location            = var.simple_resource_group.location
+		48 |   size                = "Standard_B1s"
+		49 |   admin_username      = "adminuser"
+		50 |   admin_password      = "fak*********"
+		51 |   network_interface_ids = [
+		52 |     azurerm_network_interface.simple_network_interface.id,
+		53 |   ]
+		54 | 
+		55 | 
+		56 |   os_disk {
+		57 |     caching              = "ReadWrite"
+		58 |     storage_account_type = "Standard_LRS"
+		59 |   }
+		60 | 
+		61 |   source_image_reference {
+		62 |     publisher = "MicrosoftWindowsServer"
+		63 |     offer     = "WindowsServer"
+		64 |     sku       = "2016-Datacenter"
+		65 |     version   = "latest"
+		66 |   }
+		67 | 
+		68 |   depends_on = [
+		69 |     azurerm_resource_group.simple_resource_group,
+		70 |     azurerm_network_interface.simple_network_interface
+		71 |   ]
+		72 | }
+
+Check: CKV_AZURE_151: "Ensure Windows VM enables encryption"
+	FAILED for resource: azurerm_windows_virtual_machine.simple_vm
+	File: /windows_vm.tf:44-72
+	Guide: https://docs.bridgecrew.io/docs/ensure-azure-windows-vm-enables-encryption
+
+		44 | resource "azurerm_windows_virtual_machine" "simple_vm" {
+		45 |   name                = "simple-vm-2"
+		46 |   resource_group_name = var.simple_resource_group.name
+		47 |   location            = var.simple_resource_group.location
+		48 |   size                = "Standard_B1s"
+		49 |   admin_username      = "adminuser"
+		50 |   admin_password      = "fak*********"
+		51 |   network_interface_ids = [
+		52 |     azurerm_network_interface.simple_network_interface.id,
+		53 |   ]
+		54 | 
+		55 | 
+		56 |   os_disk {
+		57 |     caching              = "ReadWrite"
+		58 |     storage_account_type = "Standard_LRS"
+		59 |   }
+		60 | 
+		61 |   source_image_reference {
+		62 |     publisher = "MicrosoftWindowsServer"
+		63 |     offer     = "WindowsServer"
+		64 |     sku       = "2016-Datacenter"
+		65 |     version   = "latest"
+		66 |   }
+		67 | 
+		68 |   depends_on = [
+		69 |     azurerm_resource_group.simple_resource_group,
+		70 |     azurerm_network_interface.simple_network_interface
+		71 |   ]
+		72 | }
+
+Check: CKV2_AZURE_31: "Ensure VNET subnet is configured with a Network Security Group (NSG)"
+	FAILED for resource: azurerm_subnet.simple_subnet
+	File: /windows_vm.tf:12-21
+
+		12 | resource "azurerm_subnet" "simple_subnet" {
+		13 |   name                 = "internal"
+		14 |   resource_group_name  = var.simple_resource_group.name
+		15 |   virtual_network_name = azurerm_virtual_network.simple_virtual_network.name
+		16 |   address_prefixes     = ["10.1.2.0/24"]
+		17 |   depends_on = [
+		18 |     azurerm_resource_group.simple_resource_group,
+		19 |     azurerm_virtual_network.simple_virtual_network
+		20 |   ]
+		21 | }
+
+secrets scan results:
+
+Passed checks: 0, Failed checks: 1, Skipped checks: 0
+
+Check: CKV_SECRET_6: "Base64 High Entropy String"
+	FAILED for resource: 1ee34e26aeaf89c64ecc2c85efe6a961b75a50e9
+	File: /windows_vm.tf:50-51
+	Guide: https://docs.bridgecrew.io/docs/git_secrets_6
+
+		50 |   admin_password      = "fak*********"
+
+

@@ -1,0 +1,18 @@
+## .circleci/config.yml
+
+version: 2.1
+
+setup: true
+
+orbs:
+  dynamic: bjd2385/dynamic-continuation@3.4.0
+
+workflows:
+  default:
+    jobs:
+      - dynamic/continue:
+          context: circleci
+          circle-token: 
+          modules: |
+            src/circlecitests/test1
+            src/circlecitests/test2

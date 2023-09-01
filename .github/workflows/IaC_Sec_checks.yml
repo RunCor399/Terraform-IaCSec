@@ -1,0 +1,53 @@
+name: IaC Sec checks performed with Checkov
+
+permissions: read-all
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+  push:
+    branches:
+      - 'final-assessment'
+    paths:
+      - 'src/final-assessment/**'
+
+
+
+jobs:
+  IaC_Sec_Checkov_Scan:
+    permissions: read-all
+      
+    
+    name: 'Checkov IaC Sec Scan'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check if pull request is opened/reopened
+        id: pr_status
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/RunCor399/Terraform-IaCSec/pulls/${{ github.event.pull_request.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkov GitHub Action
+        uses: bridgecrewio/checkov-action@v12
+        if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
+        with:
+          output_format: cli,sarif
+          output_file_path: console,results.sarif
+      
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
+          ref: ${{ github.head_ref }}
+          sha: ${{ github.sha }}
