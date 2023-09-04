@@ -100,6 +100,7 @@ resource "azurerm_key_vault" "vault" {
   location            = azurerm_resource_group.vault.location
   resource_group_name = azurerm_resource_group.vault.name
   tenant_id           = var.tenant_id
+  public_network_access_enabled = false
 
   # enable virtual machines to access this key vault.
   # NB this identity is used in the example /tmp/azure_auth.sh file.
