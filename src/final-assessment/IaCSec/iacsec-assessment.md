@@ -25,6 +25,10 @@ Total (Checkov) = 341
 
 
 
+Search filter: pr:38 tool:checkov is:open sort:created-desc path:/src/final-assessment 
+
+
+
 ## Main Vulnerabilities - Sysdig App
 - 5 High
 - 37 Medium
