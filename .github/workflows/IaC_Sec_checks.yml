@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [opened, reopened]
 
-  push:
+  #push:
     branches:
       - 'final-assessment'
     paths:
