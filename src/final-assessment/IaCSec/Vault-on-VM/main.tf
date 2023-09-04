@@ -101,6 +101,8 @@ resource "azurerm_key_vault" "vault" {
   resource_group_name = azurerm_resource_group.vault.name
   tenant_id           = var.tenant_id
   public_network_access_enabled = false
+  purge_protection_enabled = true
+  soft_delete_retention_days  = 7
 
   # enable virtual machines to access this key vault.
   # NB this identity is used in the example /tmp/azure_auth.sh file.
@@ -149,8 +151,9 @@ resource "azurerm_key_vault" "vault" {
 resource "azurerm_key_vault_key" "generated" {
   name         = var.key_name
   key_vault_id = azurerm_key_vault.vault.id
-  key_type     = "RSA"
+  key_type     = "RSA-HSM"
   key_size     = 2048
+  expiration_date = "2030-12-30T20:00:00Z"
 
   key_opts = [
     "decrypt",
@@ -195,17 +198,17 @@ resource "azurerm_network_security_group" "tf_nsg" {
   location            = var.location
   resource_group_name = azurerm_resource_group.vault.name
 
-  security_rule {
-    name                       = "SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "SSH"
+  #   priority                   = 1001
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "Tcp"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "22"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 
   security_rule {
     name                       = "Vault"
@@ -269,6 +272,7 @@ resource "azurerm_storage_account" "tf_storageaccount" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  public_network_access_enabled = false
 }
 
 resource "azurerm_storage_share" "vault" {
