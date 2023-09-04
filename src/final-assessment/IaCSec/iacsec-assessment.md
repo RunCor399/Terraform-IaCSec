@@ -1,4 +1,5 @@
 # IaC Security Assessment
+Total (Checkov) = 341
 
 ## Components included:
 - AWS infrastructure (Terraform)
