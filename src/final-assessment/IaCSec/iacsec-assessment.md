@@ -15,6 +15,10 @@ Total (Checkov) = 341
 - Ensure AKS API server defines authorized IP ranges. CKV_AZURE_6 (api_server_authorized_ip_ranges = "0.0.0.0/0")
 - Ensure AKS enables private clusters. CKV_AZURE_115 (private_cluster_enabled = true)
 - Ensure that Azure Key Vault disables public network access. CKV_AZURE_189 (network_acls in Vault-On-VM Azure Key Vault)
+- 
 ## Main Vulnerabilities - Sysdig App
+- 5 High
+- 37 Medium
+- 37 Low
 
 ## Run time of pipelines

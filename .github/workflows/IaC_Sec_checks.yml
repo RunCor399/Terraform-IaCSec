@@ -6,11 +6,7 @@ on:
   pull_request:
     types: [opened, reopened]
 
-  #push:
-    branches:
-      - 'final-assessment'
-    paths:
-      - 'src/final-assessment/**'
+
 
 
 
