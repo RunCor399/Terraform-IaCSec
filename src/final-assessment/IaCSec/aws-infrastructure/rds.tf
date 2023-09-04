@@ -10,12 +10,12 @@ resource "aws_db_instance" "rds_db" {
   db_subnet_group_name   = module.vpc.database_subnet_group_name
   skip_final_snapshot    = true //inserito solo per permettere una destroy immediata
   vpc_security_group_ids = [aws_security_group.db_plane_sg.id]
+  deletion_protection = true
 
   backup_retention_period               = 5
   iam_database_authentication_enabled   = true
   storage_encrypted                     = true
   #tfsec:ignore:aws-rds-enable-deletion-protection
-  deletion_protection                   = false //inserito solo per permettere una destroy immediata
   performance_insights_enabled          = true
   performance_insights_kms_key_id       = aws_kms_key.rds_performance_insights.arn
   performance_insights_retention_period = 7

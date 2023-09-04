@@ -21,6 +21,10 @@ Total (Checkov) = 341
 - Ensure all keys have an expiration date. CKV_AZURE_40  (expiration_date = "2020-12-30T20:00:00Z")
 - Ensure that SSH access is restricted from the internet CKV_AZURE_10 (commented Inbound SSH rule in Netwok Security Group (main.tf of Vault))
 - Ensure that Storage blobs restrict public access CKV_AZURE_190 (public_network_access_enabled = false)
+- Ensure that AWS database instances have deletion protection enabled CKV_AWS_293 (deletion_protection = true)
+
+
+
 ## Main Vulnerabilities - Sysdig App
 - 5 High
 - 37 Medium
