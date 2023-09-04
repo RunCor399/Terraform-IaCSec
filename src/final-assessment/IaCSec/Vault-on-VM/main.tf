@@ -129,9 +129,17 @@ resource "azurerm_key_vault" "vault" {
   }
 
   # TODO does this really need to be so broad? can it be limited to the vault vm?
+  # network_acls {
+  #   default_action = "Allow"
+  #   bypass         = "AzureServices"
+  # }
+
   network_acls {
-    default_action = "Allow"
+    default_action = "Deny"
     bypass         = "AzureServices"
+    virtual_network_subnet_ids = [
+      azurerm_subnet.tf_subnet.id
+    ]
   }
 }
 

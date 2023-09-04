@@ -5,11 +5,15 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     location = var.observability_rg.location
     resource_group_name = var.observability_rg.name
     sku_tier = "Free"
+    local_account_disabled = true
+    api_server_authorized_ip_ranges = "0.0.0.0/0"
+    private_cluster_enabled = true
 
     default_node_pool {
         name           = "default"
         node_count     = 1
         vm_size        = "standard_d2_v2"
+        max_pods       = 51
     }
 
 // Add role assignment for azure user

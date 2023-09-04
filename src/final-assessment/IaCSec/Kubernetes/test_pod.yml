@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: ubuntu-curl-pod
+  labels:
+    role: example-pod
 spec:
   containers:
     - name: ubuntu

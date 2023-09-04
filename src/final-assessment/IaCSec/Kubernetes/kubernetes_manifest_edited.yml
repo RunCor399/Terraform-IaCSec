@@ -30,6 +30,7 @@ spec:
     metadata:
       labels:
         app: emailservice
+        role: mail-service
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
@@ -233,6 +234,7 @@ spec:
   selector:
     matchLabels:
       app: frontend
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -341,6 +343,7 @@ spec:
   selector:
     matchLabels:
       app: paymentservice
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -409,6 +412,7 @@ spec:
     metadata:
       labels:
         app: productcatalogservice
+        role: default-deployment
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
@@ -469,6 +473,7 @@ spec:
   selector:
     matchLabels:
       app: cartservice
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -534,6 +539,7 @@ spec:
   selector:
     matchLabels:
       app: loadgenerator
+      role: default-deployment
   replicas: 1
   template:
     metadata:
@@ -604,6 +610,7 @@ spec:
   selector:
     matchLabels:
       app: currencyservice
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -669,6 +676,7 @@ spec:
   selector:
     matchLabels:
       app: shippingservice
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -733,6 +741,7 @@ spec:
   selector:
     matchLabels:
       app: redis-cart
+      role: default-deployment
   template:
     metadata:
       labels:
@@ -798,6 +807,7 @@ spec:
   selector:
     matchLabels:
       app: adservice
+      role: default-deployment
   template:
     metadata:
       labels:

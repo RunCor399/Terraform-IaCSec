@@ -33,3 +33,5 @@ override.tf.json
 *.env
 **/secrets.tf
 
+**/IaCSec_Resolution/**
+

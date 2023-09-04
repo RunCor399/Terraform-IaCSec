@@ -36,6 +36,7 @@ spec:
   selector:
     matchLabels:
       app: db-connector
+      role: default-deployment
   template:
     metadata:
       labels:

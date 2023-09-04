@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: ubuntu-pod
+  labels:
+    role: example-pod
 spec:
   containers:
     - name: ubuntu-container
