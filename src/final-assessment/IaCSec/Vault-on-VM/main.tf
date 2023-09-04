@@ -273,6 +273,7 @@ resource "azurerm_storage_account" "tf_storageaccount" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   public_network_access_enabled = false
+  allow_nested_items_to_be_public = false
 
   network_rules {
     default_action = "Deny"
