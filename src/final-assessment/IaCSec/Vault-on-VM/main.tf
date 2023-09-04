@@ -273,6 +273,12 @@ resource "azurerm_storage_account" "tf_storageaccount" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   public_network_access_enabled = false
+
+  network_rules {
+    default_action = "Deny"
+    bypass = "AzureServices"
+    ip_rules = "0.0.0.0/0"
+  }
 }
 
 resource "azurerm_storage_share" "vault" {
