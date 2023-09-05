@@ -42,10 +42,14 @@ spec:
       labels:
         app: db-connector
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: db-connector
           image: runcor3/db_connector:latest
           securityContext:
+            allowPrivilegeEscalation: false
             runAsUser: 20000
             capabilities:
             drop:

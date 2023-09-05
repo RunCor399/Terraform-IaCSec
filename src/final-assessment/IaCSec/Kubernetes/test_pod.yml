@@ -11,6 +11,7 @@ spec:
       command: ["sleep", "infinity"]
       securityContext:
         runAsUser: 20000
+        allowPrivilegeEscalation: false
         capabilities:
           drop:
           - ALL

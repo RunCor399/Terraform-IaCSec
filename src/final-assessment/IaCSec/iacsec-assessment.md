@@ -23,7 +23,9 @@ Total (Checkov) = 341
 - Ensure that Storage blobs restrict public access CKV_AZURE_190 (public_network_access_enabled = false)
 - Ensure that AWS database instances have deletion protection enabled CKV_AWS_293 (deletion_protection = true)
 - Minimize the admission of pods which lack an associated NetworkPolicy CKV_K8S_6 
-- Minimize the admission of containers with capabilities assigned CKV_K8S_37
+- Minimize the admission of containers with capabilities assigned CKV_K8S_37 (security context capabilities)
+- Containers should run as a high UID to avoid host conflict CKV_K8S_40 (security context runAsUser)
+- Containers should not run with allowPrivilegeEscalation CKV_K8S_20 (allowPrivilegeEscalation=false)
 
 
 

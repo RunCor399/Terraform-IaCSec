@@ -5,10 +5,14 @@ metadata:
   labels:
     role: example-pod
 spec:
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
   containers:
     - name: ubuntu-container
       image: ubuntu:latest
       securityContext:
+        allowPrivilegeEscalation: false
         runAsUser: 20000
         capabilities:
           drop:
