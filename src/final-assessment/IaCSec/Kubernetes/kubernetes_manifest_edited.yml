@@ -43,6 +43,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -110,6 +111,7 @@ spec:
         runAsUser: 20000
       containers:
         - name: server
+          imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -186,6 +188,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -258,6 +261,7 @@ spec:
         runAsUser: 20000
       containers:
         - name: server
+          imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -368,6 +372,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -435,6 +440,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -502,6 +508,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -597,6 +604,7 @@ spec:
           value: "frontend:80"
       containers:
       - name: main
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -643,6 +651,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -710,6 +719,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -776,6 +786,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: redis
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -846,6 +857,7 @@ spec:
         runAsUser: 20000
       containers:
       - name: server
+        imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
