@@ -43,7 +43,7 @@ Search filter: pr:38 tool:checkov is:open sort:created-desc path:/src/final-asse
 
 ### HIGH
 - Container allowing privileged sub processes | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
-- Container with NET_RAW capability | 🔴 High | 1 Occurrences
+- Container with NET_RAW capability | 🔴 High | 1 Occurrences           (SOLVED AFTER CHECKOV)
 - Container with RunAsUser root or not set | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
 - Container with writable root file system | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
 - RDS - Instance Not Public Accessible | 🔴 High | 1 Occurrences
