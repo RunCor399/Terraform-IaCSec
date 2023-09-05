@@ -46,19 +46,19 @@ Search filter: pr:38 tool:checkov is:open sort:created-desc path:/src/final-asse
 - Container with NET_RAW capability | 🔴 High | 1 Occurrences           (SOLVED AFTER CHECKOV)
 - Container with RunAsUser root or not set | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
 - Container with writable root file system | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
-- RDS - Instance Not Public Accessible | 🔴 High | 1 Occurrences
+- RDS - Instance Not Public Accessible | 🔴 High | 1 Occurrences        (SOLVED publicly_accessible = false)
 
 ### MEDIUM
 - Container using image without digest | 🟠 Medium | 13 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
 - Container using latest image | 🟠 Medium | 2 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
-- Container with ANY capability | 🟠 Medium | 1 Occurrences
-- Container with root group access | 🟠 Medium | 1 Occurrences
-- KMS - Enabled CMKs Rotation | 🟠 Medium | 2 Occurrences
+- Container with ANY capability | 🟠 Medium | 1 Occurrences (SOLVED, bad formatting of securityContext capability)
+- Container with root group access | 🟠 Medium | 1 Occurrences (Solved with runAsGroup capability)
+- KMS - Enabled CMKs Rotation | 🟠 Medium | 2 Occurrences   (NEGLECTED)
 - Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences  (SOLVED BY CHECKOV)
-- Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences
-- Workload missing CPU limit | 🟠 Medium | 2 Occurrences
-- Workload missing memory limit | 🟠 Medium | 2 Occurrences
+- Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences   (Solved with runAsGroup capability)
+- Workload missing CPU limit | 🟠 Medium | 2 Occurrences (NEGLECTED)
+- Workload missing memory limit | 🟠 Medium | 2 Occurrences (NEGLECTED)
 - Workload using "default" ServiceAccount | 🟠 Medium | 11 Occurrences  (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
-- Workload with writable volumes | 🟠 Medium | 1 Occurrences
+- Workload with writable volumes | 🟠 Medium | 1 Occurrences  (NEGLECTED)
 
 ## Run time of pipelines
