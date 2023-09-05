@@ -40,4 +40,25 @@ Search filter: pr:38 tool:checkov is:open sort:created-desc path:/src/final-asse
 - 37 Medium
 - 37 Low
 
+
+### HIGH
+- Container allowing privileged sub processes | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
+- Container with NET_RAW capability | 🔴 High | 1 Occurrences
+- Container with RunAsUser root or not set | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
+- Container with writable root file system | 🔴 High | 1 Occurrences   (SOLVED AFTER CHECKOV)
+- RDS - Instance Not Public Accessible | 🔴 High | 1 Occurrences
+
+### MEDIUM
+- Container using image without digest | 🟠 Medium | 25 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Container using latest image | 🟠 Medium | 3 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Container with ANY capability | 🟠 Medium | 1 Occurrences
+- Container with root group access | 🟠 Medium | 1 Occurrences
+- KMS - Enabled CMKs Rotation | 🟠 Medium | 2 Occurrences
+- Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences
+- Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences
+- Workload missing CPU limit | 🟠 Medium | 3 Occurrences
+- Workload missing memory limit | 🟠 Medium | 3 Occurrences
+- Workload using "default" ServiceAccount | 🟠 Medium | 22 Occurrences  (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Workload with writable volumes | 🟠 Medium | 2 Occurrences
+
 ## Run time of pipelines
