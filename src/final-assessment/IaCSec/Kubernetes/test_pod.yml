@@ -13,6 +13,7 @@ spec:
       image: ubuntu
       command: ["sleep", "infinity"]
       securityContext:
+        readOnlyRootFilesystem: true
         runAsUser: 20000
         allowPrivilegeEscalation: false
         capabilities:
