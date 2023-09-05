@@ -35,6 +35,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -100,6 +102,8 @@ spec:
     spec:
       serviceAccountName: default
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -174,6 +178,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -244,6 +250,8 @@ spec:
     spec:
       serviceAccountName: default
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -352,6 +360,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -417,6 +427,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -482,6 +494,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -552,6 +566,8 @@ spec:
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -619,6 +635,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -684,6 +702,8 @@ spec:
     spec:
       serviceAccountName: default
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -748,6 +768,8 @@ spec:
         app: redis-cart
     spec:
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
@@ -816,6 +838,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true

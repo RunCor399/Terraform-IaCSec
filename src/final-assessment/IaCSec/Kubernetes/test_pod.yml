@@ -5,6 +5,9 @@ metadata:
   labels:
     role: example-pod
 spec:
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
   containers:
     - name: ubuntu
       image: ubuntu
