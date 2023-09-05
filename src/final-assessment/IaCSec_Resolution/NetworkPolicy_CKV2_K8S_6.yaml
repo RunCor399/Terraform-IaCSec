@@ -1,0 +1,83 @@
+# Mail Network Policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: mail-service-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: mail-service
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from: []
+      ports:
+        - protocol: TCP
+          port: 995
+        - protocol: TCP
+          port: 110
+  egress:
+    - to: []
+      ports:
+        - protocol: TCP
+          port: 465
+        - protocol: TCP
+          port: 25
+        - protocol: TCP
+          port: 26
+
+---
+
+# Default Network Policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: example-pod
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from: []
+      ports:
+        - protocol: TCP
+          port: 0
+
+  egress:
+    - to: []
+      ports:
+        - protocol: TCP
+          port: 0
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deployment-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: default-deployment
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from: []
+      ports:
+        - protocol: TCP
+          port: 0
+
+  egress:
+    - to: []
+      ports:
+        - protocol: TCP
+          port: 0
+

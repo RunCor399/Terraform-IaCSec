@@ -1,0 +1,82 @@
+# Load Balancer Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: db-connector
+  ports:
+  - name: db-connector
+    port: 8888
+    targetPort: 8888
+---
+# Internal Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-connector
+spec:
+  type: ClusterIP
+  selector:
+    app: db-connector
+  ports:
+  - name: custom-port
+    port: 8888
+    targetPort: 8888
+---
+# Spring App Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-connector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-connector
+      role: default-deployment
+  template:
+    metadata:
+      labels:
+        app: db-connector
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: db-connector
+          #checkov:skip=CKV_K8S_43:No image digest
+          #checkov:skip=CKV_K8S_14:No image tag
+          image: runcor3/db_connector:latest
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsUser: 20000
+            runAsGroup: {{.Value}}
+            capabilities:
+              drop:
+                - ALL
+          livenessProbe:
+            exec:
+              command:
+                - cat
+                - /tmp/healthy
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 8888
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c"]
+                args: ["export KUBE_TOKEN=/var/run/secrets/kubernetes.io/serviceaccount/token"]
+
+

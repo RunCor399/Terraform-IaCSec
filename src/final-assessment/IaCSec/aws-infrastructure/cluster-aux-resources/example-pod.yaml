@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-pod
+  labels:
+    role: example-pod
+spec:
+  automountServiceAccountToken: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: ubuntu-container
+      #checkov:skip=CKV_K8S_43:No image digest
+      #checkov:skip=CKV_K8S_14:No image tag
+      image: ubuntu:latest
+      securityContext:
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        runAsUser: 20000
+        capabilities:
+          drop:
+          - ALL
+      livenessProbe:
+        exec:
+          command:
+          - cat
+          - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 200m
+          memory: 180Mi
+        limits:
+          cpu: 300m
+          memory: 300Mi
+      command: ["sleep", "3600"]

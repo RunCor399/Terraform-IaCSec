@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-curl-pod
+  labels:
+    role: example-pod
+spec:
+  automountServiceAccountToken: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      #checkov:skip=CKV_K8S_43:No image digest
+      #checkov:skip=CKV_K8S_14:No image tag
+      command: ["sleep", "infinity"]
+      securityContext:
+        readOnlyRootFilesystem: true
+        runAsUser: 20000
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+      livenessProbe:
+        exec:
+          command:
+          - cat
+          - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: "512Mi"
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+
+
+
+
+
