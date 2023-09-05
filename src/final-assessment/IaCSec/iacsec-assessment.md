@@ -49,16 +49,16 @@ Search filter: pr:38 tool:checkov is:open sort:created-desc path:/src/final-asse
 - RDS - Instance Not Public Accessible | 🔴 High | 1 Occurrences
 
 ### MEDIUM
-- Container using image without digest | 🟠 Medium | 25 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
-- Container using latest image | 🟠 Medium | 3 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Container using image without digest | 🟠 Medium | 13 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Container using latest image | 🟠 Medium | 2 Occurrences (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
 - Container with ANY capability | 🟠 Medium | 1 Occurrences
 - Container with root group access | 🟠 Medium | 1 Occurrences
 - KMS - Enabled CMKs Rotation | 🟠 Medium | 2 Occurrences
-- Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences
+- Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences  (SOLVED BY CHECKOV)
 - Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences
-- Workload missing CPU limit | 🟠 Medium | 3 Occurrences
-- Workload missing memory limit | 🟠 Medium | 3 Occurrences
-- Workload using "default" ServiceAccount | 🟠 Medium | 22 Occurrences  (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
-- Workload with writable volumes | 🟠 Medium | 2 Occurrences
+- Workload missing CPU limit | 🟠 Medium | 2 Occurrences
+- Workload missing memory limit | 🟠 Medium | 2 Occurrences
+- Workload using "default" ServiceAccount | 🟠 Medium | 11 Occurrences  (DETECTED BY CHECKOV TOO, NEGLIGIBLE)
+- Workload with writable volumes | 🟠 Medium | 1 Occurrences
 
 ## Run time of pipelines
