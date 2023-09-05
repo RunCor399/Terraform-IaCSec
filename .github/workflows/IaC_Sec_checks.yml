@@ -4,13 +4,9 @@ permissions: read-all
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize, edited]
 
-  push:
-    branches:
-      - 'final-assessment'
-    paths:
-      - 'src/final-assessment/**'
+
 
 
 
@@ -42,6 +38,7 @@ jobs:
         #if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
 
         with:
+          #check: 'LOW,MEDIUM,HIGH,CRITICAL'
           output_format: cli,sarif
           output_file_path: console,results.sarif
       
