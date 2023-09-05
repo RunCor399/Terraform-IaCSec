@@ -11,6 +11,7 @@ resource "aws_db_instance" "rds_db" {
   skip_final_snapshot    = true //inserito solo per permettere una destroy immediata
   vpc_security_group_ids = [aws_security_group.db_plane_sg.id]
   deletion_protection = true
+  publicly_accessible = false
 
   backup_retention_period               = 5
   iam_database_authentication_enabled   = true
