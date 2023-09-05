@@ -45,6 +45,10 @@ spec:
       containers:
         - name: db-connector
           image: runcor3/db_connector:latest
+          securityContext:
+            capabilities:
+            drop:
+              - ALL
           ports:
             - containerPort: 8888
           lifecycle:

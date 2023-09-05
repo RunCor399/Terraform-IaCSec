@@ -8,4 +8,8 @@ spec:
   containers:
     - name: ubuntu-container
       image: ubuntu:latest
+      securityContext:
+        capabilities:
+          drop:
+          - ALL
       command: ["sleep", "3600"]

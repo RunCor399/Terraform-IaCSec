@@ -22,6 +22,8 @@ Total (Checkov) = 341
 - Ensure that SSH access is restricted from the internet CKV_AZURE_10 (commented Inbound SSH rule in Netwok Security Group (main.tf of Vault))
 - Ensure that Storage blobs restrict public access CKV_AZURE_190 (public_network_access_enabled = false)
 - Ensure that AWS database instances have deletion protection enabled CKV_AWS_293 (deletion_protection = true)
+- Minimize the admission of pods which lack an associated NetworkPolicy CKV_K8S_6 
+- Minimize the admission of containers with capabilities assigned CKV_K8S_37
 
 
 
