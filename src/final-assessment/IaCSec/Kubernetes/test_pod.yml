@@ -5,6 +5,7 @@ metadata:
   labels:
     role: example-pod
 spec:
+  automountServiceAccountToken: false
   securityContext:
     seccompProfile:
       type: RuntimeDefault
