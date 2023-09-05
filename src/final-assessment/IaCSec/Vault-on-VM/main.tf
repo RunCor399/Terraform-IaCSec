@@ -253,6 +253,11 @@ resource "azurerm_network_interface_security_group_association" "tf_nisga" {
   network_security_group_id = azurerm_network_security_group.tf_nsg.id
 }
 
+resource "azurerm_subnet_network_security_group_association" "example" {
+  subnet_id                 = azurerm_subnet.tf_subnet.id
+  network_security_group_id = azurerm_network_security_group.tf_nsg.id
+}
+
 resource "random_id" "tf_random_id" {
   keepers = {
     # Generate a new ID only when a new resource group is defined

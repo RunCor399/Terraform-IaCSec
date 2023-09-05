@@ -1,3 +1,4 @@
+
 resource "azurerm_virtual_network" "database_virtual_network" {
   name                = "database_virtual_network"
   location            = var.mysql_db_resource_group.location
@@ -21,6 +22,31 @@ resource "azurerm_subnet" "database_vn_subnet" {
     }
   }
 }
+
+resource "azurerm_network_security_group" "db_network_nsg" {
+  name                = "databaseNSG"
+  location            = var.mysql_db_resource_group.location
+  resource_group_name = var.mysql_db_resource_group.name
+
+  security_rule {
+    name                       = "InboundDBConnections"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3306"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "example" {
+  subnet_id                 = azurerm_subnet.database_vn_subnet.id
+  network_security_group_id = azurerm_network_security_group.db_network_nsg.id
+}
+
+
 
 resource "azurerm_private_dns_zone" "database_dns_zone" {
   name                = "databasemysqlmec.com"
