@@ -9,6 +9,7 @@ spec:
     - name: ubuntu-container
       image: ubuntu:latest
       securityContext:
+        runAsUser: 20000
         capabilities:
           drop:
           - ALL

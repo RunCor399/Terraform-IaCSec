@@ -10,6 +10,7 @@ spec:
       image: ubuntu
       command: ["sleep", "infinity"]
       securityContext:
+        runAsUser: 20000
         capabilities:
           drop:
           - ALL
