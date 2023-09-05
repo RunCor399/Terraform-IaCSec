@@ -27,6 +27,7 @@ resource "azurerm_linux_web_app" "keycloak-webapp" {
 
   site_config {
     always_on = false
+    ftps_state = "FtpsOnly"
   }
 
   depends_on = [ azurerm_service_plan.keycloak-sp ]

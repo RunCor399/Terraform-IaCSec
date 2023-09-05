@@ -27,6 +27,7 @@ Total (Checkov) = 341
 - Containers should run as a high UID to avoid host conflict CKV_K8S_40 (security context runAsUser)
 - Containers should not run with allowPrivilegeEscalation CKV_K8S_20 (allowPrivilegeEscalation=false)
 - Ensure that the seccomp profile is set to docker/default or runtime/default CKV_K8S_31 (seccomp_profile RuntimeDefault)
+- Ensure FTP deployments are disabled CKV_AZURE_78 (ftps_state)
 
 
 
