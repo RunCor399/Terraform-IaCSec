@@ -26,6 +26,7 @@ Total (Checkov) = 341
 - Minimize the admission of containers with capabilities assigned CKV_K8S_37 (security context capabilities)
 - Containers should run as a high UID to avoid host conflict CKV_K8S_40 (security context runAsUser)
 - Containers should not run with allowPrivilegeEscalation CKV_K8S_20 (allowPrivilegeEscalation=false)
+- Ensure that the seccomp profile is set to docker/default or runtime/default CKV_K8S_31 (seccomp_profile RuntimeDefault)
 
 
 
