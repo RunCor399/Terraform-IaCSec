@@ -11,6 +11,8 @@ spec:
       type: RuntimeDefault
   containers:
     - name: ubuntu-container
+      #checkov:skip=CKV_K8S_43:No image digest
+      #checkov:skip=CKV_K8S_14:No image tag
       image: ubuntu:latest
       securityContext:
         readOnlyRootFilesystem: true

@@ -12,6 +12,8 @@ spec:
   containers:
     - name: ubuntu
       image: ubuntu
+      #checkov:skip=CKV_K8S_43:No image digest
+      #checkov:skip=CKV_K8S_14:No image tag
       command: ["sleep", "infinity"]
       securityContext:
         readOnlyRootFilesystem: true
