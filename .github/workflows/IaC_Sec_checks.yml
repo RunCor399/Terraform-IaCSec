@@ -35,14 +35,14 @@ jobs:
 
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12
-        with:
-          download_external_modules: true
+          
         #if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
 
         with:
           #check: 'LOW,MEDIUM,HIGH,CRITICAL'
           output_format: cli,sarif
           output_file_path: console,results.sarif
+          download_external_modules: true
       
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
