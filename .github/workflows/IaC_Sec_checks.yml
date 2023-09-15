@@ -4,13 +4,9 @@ permissions: read-all
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize, edited]
 
-  push:
-    branches:
-      - 'final-assessment'
-    paths:
-      - 'src/final-assessment/**'
+
 
 
 
@@ -27,21 +23,27 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
+    
 
       - name: Check if pull request is opened/reopened
         id: pr_status
         uses: octokit/request-action@v2.x
         with:
-          route: GET /repos/RunCor399/Terraform-IaCSec/pulls/${{ github.event.pull_request.number }}
+          route: GET /repos/RunCor399/Terraform-IaCSec/pulls/${{ github.event.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12
-        if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
+          
+        #if: ${{ steps.pr_status.outputs.data.state == 'open' || steps.pr_status.outputs.data.state == 'reopened' }}
+
         with:
+          #check: 'LOW,MEDIUM,HIGH,CRITICAL'
           output_format: cli,sarif
           output_file_path: console,results.sarif
+          download_external_modules: true
+          directory: src/final-assessment
       
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
@@ -49,5 +51,5 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results.sarif
-          ref: ${{ github.head_ref }}
-          sha: ${{ github.sha }}
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+          sha: ${{ github.event.pull_request.head.sha }}
